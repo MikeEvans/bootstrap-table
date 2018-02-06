@@ -408,7 +408,11 @@
                     dataType: 'json',
                     success: function (data) {
                         for (var key in data) {
-                            addOptionToSelectControl(selectControl, key, data[key]);
+                            if (typeof data[key] === 'object') {
+                                addOptionToSelectControl(selectControl, data[key].value, data[key].text);
+                            } else {
+                                addOptionToSelectControl(selectControl, key, data[key]);
+                            }                            
                         }
                         sortSelectControl(selectControl);
                     }
